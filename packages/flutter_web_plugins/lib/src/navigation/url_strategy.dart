@@ -153,7 +153,7 @@ class PathUrlStrategy extends HashUrlStrategy {
   /// interactions.
   PathUrlStrategy([
     super.platformLocation,
-  ])  : _basePath = stripTrailingSlash(extractPathname(checkBaseHref(
+  ]) : _basePath = stripTrailingSlash(extractPathname(checkBaseHref(
           platformLocation.getBaseHref(),
         )));
 

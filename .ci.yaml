@@ -6,6 +6,7 @@
 # More information at:
 #  * https://github.com/flutter/cocoon/blob/main/CI_YAML.md
 enabled_branches:
+  - flutter-2.8-candidate.3
   - main
   - master
   - flutter-\d+\.\d+-candidate\.\d+
@@ -105,8 +106,7 @@ platform_properties:
           {"dependency": "chrome_and_driver", "version": "version:98.1"},
           {"dependency": "open_jdk", "version": "11"}
         ]
-      os: Mac-12
-      cpu: x86
+      os: Mac-12.0
       device_os: N
   mac_ios:
     properties:
@@ -127,9 +127,30 @@ platform_properties:
           {"dependency": "gems"},
           {"dependency": "ios_signing"}
         ]
-      os: Mac-12
-      cpu: x86
+      os: Mac-12.0
       device_os: iOS-15.1
+      xcode: 13a233
+  mac_ios32:
+    properties:
+      caches: >-
+          [
+            {"name":"builder_mac_devicelab","path":"builder"},
+            {"name":"chrome_and_driver","path":"chrome"},
+            {"name":"flutter_sdk","path":"flutter sdk"},
+            {"name":"gradle","path":"gradle"},
+            {"name":"openjdk","path":"java"},
+            {"name":"pub_cache","path":".pub-cache"},
+            {"name":"xcode_binary","path":"xcode_binary"},
+            {"name":"osx_sdk","path":"osx_sdk"}
+          ]
+      dependencies: >-
+        [
+          {"dependency": "xcode"},
+          {"dependency": "gems"},
+          {"dependency": "ios_signing"}
+        ]
+      os: Mac-12.0
+      device_os: iOS-9.3.6
       xcode: 13a233
   windows:
     properties:
@@ -2799,6 +2820,7 @@ targets:
 
   - name: Mac module_test_ios
     recipe: devicelab/devicelab_drone
+    bringup: true # Flaky https://github.com/flutter/flutter/issues/93517
     timeout: 60
     properties:
       caches: >-
